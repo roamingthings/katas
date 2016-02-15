@@ -44,6 +44,6 @@ public class GameTest {
         game.roll(2);
         game.roll(3);
         game.roll(4);
-        assertThat(game.score()).isEqualTo(10 + (2 * 2 + 2) + 3 + 4);
+        assertThat(game.score()).isEqualTo(10 + 2 * (2 + 2) + 3 + 4);
     }
 }

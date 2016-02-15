@@ -3,40 +3,20 @@ package de.egga.bowling;
 import java.util.ArrayList;
 import java.util.List;
 
+import static de.egga.bowling.Frame.*;
+import static de.egga.bowling.Frame.defaultFrame;
+
 public class Game {
 
-    private int multiplier = 0;
     private List<Frame> frames = new ArrayList<>();
-    private Frame currentFrame;
 
     public Game() {
-        addNewFrame();
+        frames.add(defaultFrame());
     }
 
     public void roll(int numberOfPins) {
         createNewFrameIfNecessary();
-        currentFrame.addRoll(numberOfPins);
-    }
-
-    private void createNewFrameIfNecessary() {
-        if (currentFrame.isFinished()) {
-            if (currentFrame.isSpare()) {
-                multiplier = multiplier + 1;
-            }
-
-            if (currentFrame.isStrike()) {
-                multiplier = multiplier + 1;
-            }
-
-            addNewFrame();
-            multiplier = 0;
-        }
-    }
-
-    private void addNewFrame() {
-        Frame newFrame = new Frame(multiplier);
-        frames.add(newFrame);
-        currentFrame = newFrame;
+        currentFrame().addRoll(numberOfPins);
     }
 
     public int score() {
@@ -49,49 +29,24 @@ public class Game {
         return sum;
     }
 
-    private class Frame {
+    private Frame currentFrame() {
+        return frames.get(frames.size() - 1);
+    }
 
-        public static final int TOTAL_NUMBER_OF_PINS = 10;
-        public static final int ROLLS_PER_FRAME = 2;
+    private void createNewFrameIfNecessary() {
+        if (currentFrame().isFinished()) {
 
-        private int pinsLeft = TOTAL_NUMBER_OF_PINS;
-        private int rollsLeft = ROLLS_PER_FRAME;
-        private List<Integer> pinsKnockedDown = new ArrayList<>();
-        private int bonusRolls;
+            if (currentFrame().isSpare()) {
+                frames.add(afterSpare());
 
-        public Frame(int bonusRolls) {
-            this.bonusRolls = bonusRolls;
-        }
+            } else if (currentFrame().isStrike()) {
+                frames.add(afterStrike());
 
-        public void addRoll(int numberOfPins) {
-            pinsKnockedDown.add(numberOfPins);
-            pinsLeft -= numberOfPins;
-            rollsLeft--;
-        }
-
-        public int score() {
-            int score = 0;
-            for (Integer integer : pinsKnockedDown) {
-                if (bonusRolls > 0) {
-                    score += integer;
-                    bonusRolls--;
-                }
-                score += integer;
+            } else {
+                frames.add(defaultFrame());
             }
-
-            return score;
-        }
-
-        public boolean isFinished() {
-            return rollsLeft == 0 || pinsLeft == 0;
-        }
-
-        public boolean isSpare() {
-            return pinsLeft == 0 && rollsLeft == 0;
-        }
-
-        public boolean isStrike() {
-            return pinsLeft == 0 && rollsLeft == 1;
         }
     }
+
 }
+
