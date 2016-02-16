@@ -1,4 +1,4 @@
-package de.egga.bowling;
+package de.egga.bowling._001;
 
 import org.junit.Test;
 
@@ -9,22 +9,23 @@ public class GameTest {
     Game game = new Game();
 
     @Test
-    public void it_should_have_score_of_zero_before_first_r0ll() {
+    public void it_should_have_zero_score_before_first_roll() {
         assertThat(game.score()).isEqualTo(0);
     }
 
     @Test
-    public void it_should_have_score_of_zero_if_no_pins_knocked_down() {
+    public void it_should_have_zero_score_if_no_pins_knocked_down() {
         game.roll(0);
         assertThat(game.score()).isEqualTo(0);
     }
 
     @Test
-    public void it_should_have_score_according_to_pins_knocked_down() {
+    public void it_should_add_pins_knocked_down() {
         game.roll(1);
         game.roll(2);
         game.roll(3);
-        assertThat(game.score()).isEqualTo(1 + 2 + 3);
+        game.roll(4);
+        assertThat(game.score()).isEqualTo(1 + 2 + 3 + 4);
     }
 
     @Test
@@ -32,9 +33,8 @@ public class GameTest {
         game.roll(5);
         game.roll(5);
         game.roll(2);
-        game.roll(3);
-        game.roll(4);
-        assertThat(game.score()).isEqualTo(5 + 5 + (2 * 2) + 3 + 4);
+        game.roll(2);
+        assertThat(game.score()).isEqualTo(5 + 5 + (2 * 2) + 2);
     }
 
     @Test
@@ -42,8 +42,6 @@ public class GameTest {
         game.roll(10);
         game.roll(2);
         game.roll(2);
-        game.roll(3);
-        game.roll(4);
-        assertThat(game.score()).isEqualTo(10 + 2 * (2 + 2) + 3 + 4);
+        assertThat(game.score()).isEqualTo(10 + 2 * (2 + 2));
     }
 }

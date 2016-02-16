@@ -1,10 +1,11 @@
-package de.egga.bowling;
+package de.egga.bowling._001;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static de.egga.bowling.Frame.*;
-import static de.egga.bowling.Frame.defaultFrame;
+import static de.egga.bowling._001.Frame.defaultFrame;
+import static de.egga.bowling._001.Frame.frameAfterSpare;
+import static de.egga.bowling._001.Frame.frameAfterStrike;
 
 public class Game {
 
@@ -29,24 +30,22 @@ public class Game {
         return sum;
     }
 
-    private Frame currentFrame() {
-        return frames.get(frames.size() - 1);
-    }
-
     private void createNewFrameIfNecessary() {
+
         if (currentFrame().isFinished()) {
 
             if (currentFrame().isSpare()) {
-                frames.add(afterSpare());
-
+                frames.add(frameAfterSpare());
             } else if (currentFrame().isStrike()) {
-                frames.add(afterStrike());
-
+                frames.add(frameAfterStrike());
             } else {
                 frames.add(defaultFrame());
             }
         }
     }
 
+    private Frame currentFrame() {
+        return frames.get(frames.size() - 1);
+    }
 }
 
