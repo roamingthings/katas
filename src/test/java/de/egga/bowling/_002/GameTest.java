@@ -24,6 +24,16 @@ public class GameTest {
         game.roll(1);
         game.roll(2);
         game.roll(3);
-        assertThat(game.score()).isEqualTo(1+2+3);
+        assertThat(game.score()).isEqualTo(1 + 2 + 3);
+    }
+
+    @Test
+    public void it_should_add_bonus_for_spare() {
+        game.roll(4);
+        game.roll(6);
+        game.roll(3);
+        game.roll(3);
+        game.roll(1);
+        assertThat(game.score()).isEqualTo(4 + 6 + (2 * 3) + 3 + 1);
     }
 }

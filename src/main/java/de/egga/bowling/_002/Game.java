@@ -29,7 +29,15 @@ public class Game {
 
     private void createNewFrameIfNecessary() {
         if (currentFrame().isFinished()) {
-            frames.add(new Frame());
+            frames.add(nextFrame());
+        }
+    }
+
+    private Frame nextFrame() {
+        if (currentFrame().isSpare()) {
+            return new FrameAfterSpare();
+        } else {
+            return new Frame();
         }
     }
 
