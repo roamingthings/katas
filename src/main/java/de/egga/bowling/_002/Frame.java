@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Frame {
 
-    public static final int NUMBER_OF_ROLES_PER_FRAME = 2;
     public static final int TOTAL_NUMBER_OF_PINS = 10;
+
     private List<Integer> rolls = new ArrayList<>();
 
     public void addRoll(int numberOfPins) {
@@ -18,11 +18,15 @@ public class Frame {
     }
 
     public boolean isFinished() {
-        return rolls.size() == NUMBER_OF_ROLES_PER_FRAME;
+        return didTwoRolls() || allPinsKnockedDown();
     }
 
     public boolean isSpare() {
-        return totalNumberOfPinsKnockedDownInFrame() == TOTAL_NUMBER_OF_PINS;
+        return allPinsKnockedDown() && didTwoRolls();
+    }
+
+    public boolean isStrike() {
+        return allPinsKnockedDown() && didOneRoll();
     }
 
 
@@ -38,5 +42,18 @@ public class Frame {
 
     protected int pinsKnockedDownInFirstRoll() {
         return rolls.get(0);
+    }
+
+
+    private boolean didOneRoll() {
+        return rolls.size() == 1;
+    }
+
+    private boolean didTwoRolls() {
+        return rolls.size() == 2;
+    }
+
+    private boolean allPinsKnockedDown() {
+        return totalNumberOfPinsKnockedDownInFrame() == TOTAL_NUMBER_OF_PINS;
     }
 }

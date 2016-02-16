@@ -36,4 +36,13 @@ public class GameTest {
         game.roll(1);
         assertThat(game.score()).isEqualTo(4 + 6 + (2 * 3) + 3 + 1);
     }
+
+    @Test
+    public void it_should_add_bonus_for_strike() {
+        game.roll(10);
+        game.roll(3);
+        game.roll(3);
+        game.roll(1);
+        assertThat(game.score()).isEqualTo(10 + (2 * (3 + 3)) + 1);
+    }
 }

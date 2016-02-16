@@ -36,6 +36,8 @@ public class Game {
     private Frame nextFrame() {
         if (currentFrame().isSpare()) {
             return new FrameAfterSpare();
+        } else if (currentFrame().isStrike()) {
+            return new FrameAfterStrike();
         } else {
             return new Frame();
         }
