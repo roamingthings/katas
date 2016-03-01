@@ -31,7 +31,8 @@ public class Race {
     }
 
     public int getPoints(Driver driver) {
-        return Race.POINTS[position(driver)];
+        int position = position(driver);
+        return Race.POINTS[position];
     }
 
     public List<Driver> getResults() {
