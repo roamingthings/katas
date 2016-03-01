@@ -3,21 +3,13 @@ package de.egga.race_cars._001.leaderboard;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
+import static de.egga.race_cars._001.leaderboard.DriverFactory.*;
+import static de.egga.race_cars._001.leaderboard.RaceFactory.RACE_NAME;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RaceTest {
 
-    public static final String RACE_NAME = "some race";
-    public static final String COUNTRY_NAME = "some country";
-    public static final String ALGORITHM_VERSION = "some algo";
-    public static final String COMPANY_NAME = "some company";
-
-    Driver winner = new Driver("some winner", COUNTRY_NAME);
-    Driver second = new Driver("some second", COUNTRY_NAME);
-    Driver third = new Driver("some third", COUNTRY_NAME);
-    Race race = new Race(RACE_NAME, winner, second, third);
-
-    SelfDrivingCar selfDrivingCar = new SelfDrivingCar(ALGORITHM_VERSION, COMPANY_NAME);
+    private final Race race = RaceFactory.race(winner, second, third);
 
     @Test
     public void drivers_should_have_right_positions() {
@@ -43,21 +35,21 @@ public class RaceTest {
 
     @Test
     public void self_driving_car_name_should_be_altered() {
-        Race race = new Race(RACE_NAME, selfDrivingCar);
-        String driverName = race.getDriverName(selfDrivingCar);
+        SelfDrivingCar driver = selfDrivingCar();
+        String driverName = RaceFactory.race(driver).getDriverName(driver);
         assertThat(driverName).isEqualTo("Self Driving Car - some company (some algo)");
     }
 
     @Test
     public void real_driver_name_should_not_be_altered() {
-        Driver realDriver = new Driver("real name", COUNTRY_NAME);
-        Race race = new Race(RACE_NAME, realDriver);
-        String driverName = race.getDriverName(realDriver);
+        Driver driver = realDriver();
+        String driverName = RaceFactory.race(driver).getDriverName(driver);
         assertThat(driverName).isEqualTo("real name");
     }
 
     @Test
     public void to_string_should_return_race_name() {
+        Race race = new Race(RACE_NAME);
         assertThat(race.toString()).isEqualTo(RACE_NAME);
     }
 
