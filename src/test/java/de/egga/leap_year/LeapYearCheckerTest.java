@@ -6,7 +6,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LeapYearCheckerTest {
 
-        LeapYearChecker leapYearChecker = new LeapYearChecker();
+    LeapYearChecker leapYearChecker = new LeapYearChecker();
+
     @Test
     public void isNotLeapYear() {
         boolean isLeapYear = leapYearChecker.isLeapYear(1);
