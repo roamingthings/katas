@@ -2,13 +2,17 @@ package de.egga.race_cars._001.telemetry_system;
 
 public class TelemetryDiagnosticControls {
 
-    private final String DiagnosticChannelConnectionString = "*111#";
+    private static final String DiagnosticChannelConnectionString = "*111#";
 
-    private final TelemetryClient telemetryClient;
+    private final Client client;
     private String diagnosticInfo = "";
 
     public TelemetryDiagnosticControls() {
-        telemetryClient = new TelemetryClient();
+        this(new TelemetryClient());
+    }
+
+    public TelemetryDiagnosticControls(Client client) {
+        this.client = client;
     }
 
     public String getDiagnosticInfo() {
@@ -22,19 +26,19 @@ public class TelemetryDiagnosticControls {
     public void checkTransmission() throws Exception {
         diagnosticInfo = "";
 
-        telemetryClient.disconnect();
+        client.disconnect();
 
         int retryLeft = 3;
-        while (telemetryClient.getOnlineStatus() == false && retryLeft > 0) {
-            telemetryClient.connect(DiagnosticChannelConnectionString);
+        while (client.getOnlineStatus() == false && retryLeft > 0) {
+            client.connect(DiagnosticChannelConnectionString);
             retryLeft -= 1;
         }
 
-        if (telemetryClient.getOnlineStatus() == false) {
+        if (client.getOnlineStatus() == false) {
             throw new Exception("Unable to connect.");
         }
 
-        telemetryClient.send(TelemetryClient.DIAGNOSTIC_MESSAGE);
-        diagnosticInfo = telemetryClient.receive();
+        client.send(TelemetryClient.DIAGNOSTIC_MESSAGE);
+        diagnosticInfo = client.receive();
     }
 }
