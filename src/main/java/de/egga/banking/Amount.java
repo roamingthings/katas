@@ -2,7 +2,7 @@ package de.egga.banking;
 
 public class Amount {
 
-    private final int amount;
+    private final Integer amount;
 
     public Amount(int amount) {
         this.amount = amount;
@@ -13,8 +13,8 @@ public class Amount {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Amount amount1 = (Amount) o;
-        return amount == amount1.amount;
+        Amount that = (Amount) o;
+        return this.amount == that.amount;
     }
 
     @Override
@@ -27,6 +27,6 @@ public class Amount {
     }
 
     public String print() {
-        return amount + "";
+        return amount.toString();
     }
 }
