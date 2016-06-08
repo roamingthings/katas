@@ -6,7 +6,6 @@ import java.util.List;
 public class Account {
 
     private final Printer printer;
-    private int amount = 0;
     private List<Integer>  amounts = new ArrayList<>();
 
     public Account(Printer printer) {
@@ -15,10 +14,15 @@ public class Account {
 
     public void deposit(int amount) {
         amounts.add(amount);
-        this.amount += amount;
     }
 
     public void printStatement() {
-        printer.print(amount);
+        int balance = 0;
+
+        for (Integer amount : amounts) {
+            balance += amount;
+        }
+
+        printer.print(balance);
     }
 }
