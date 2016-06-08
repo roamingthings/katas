@@ -15,7 +15,7 @@ public class AccountTest {
     @InjectMocks Account account;
 
     @Test
-    public void itName() {
+    public void print_statement_should_use_printer() {
         account.printStatement();
         verify(printer).print();
     }
