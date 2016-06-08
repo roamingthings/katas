@@ -19,13 +19,12 @@ public class Account {
     }
 
     public void printStatement() {
-        int balance = 0;
-        Amount balance2 = amount(0);
+        Amount balance = amount(0);
 
         for (Transaction transaction : transactions) {
-            balance2 = balance2.add(transaction.amount);
+            balance = balance.add(transaction.amount);
         }
 
-        printer.print(balance2.print());
+        printer.print(balance.print());
     }
 }

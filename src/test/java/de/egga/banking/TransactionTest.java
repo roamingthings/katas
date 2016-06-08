@@ -8,7 +8,6 @@ public class TransactionTest {
 
     @Test
     public void transactions_with_same_amount_should_be_equal() {
-
         Transaction transaction = new Transaction(12);
         assertThat(transaction).isEqualTo(new Transaction(12));
     }
