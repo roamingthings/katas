@@ -28,7 +28,7 @@ public class Amount {
     }
 
     public Amount add(Amount amount) {
-        return new Amount(this.amount + amount.amount);
+        return amount(this.amount + amount.amount);
     }
 
     public String print() {

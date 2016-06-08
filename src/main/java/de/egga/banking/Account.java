@@ -3,6 +3,8 @@ package de.egga.banking;
 import java.util.ArrayList;
 import java.util.List;
 
+import static de.egga.banking.Amount.amount;
+
 public class Account {
 
     private final Printer printer;
@@ -18,7 +20,7 @@ public class Account {
 
     public void printStatement() {
         int balance = 0;
-        Amount balance2 = new Amount(0);
+        Amount balance2 = amount(0);
 
         for (Transaction transaction : transactions) {
             balance2 = balance2.add(transaction.amount);

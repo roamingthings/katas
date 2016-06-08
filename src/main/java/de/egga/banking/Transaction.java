@@ -5,7 +5,7 @@ public class Transaction {
     public final Amount amount;
 
     public Transaction(int amount) {
-        this.amount = new Amount(amount);
+        this.amount = Amount.amount(amount);
     }
 
     @Override
