@@ -17,6 +17,6 @@ public class AccountTest {
     @Test
     public void print_statement_should_use_printer() {
         account.printStatement();
-        verify(printer).print();
+        verify(printer).print(0);
     }
 }

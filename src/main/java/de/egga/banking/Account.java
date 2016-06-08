@@ -9,6 +9,6 @@ public class Account {
     }
 
     public void printStatement() {
-        printer.print();
+        printer.print(0);
     }
 }

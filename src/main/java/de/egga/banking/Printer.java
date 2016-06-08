@@ -1,7 +1,7 @@
 package de.egga.banking;
 
 public class Printer {
-    public void print() {
+    public void print(int i) {
 
     }
 }
