@@ -6,6 +6,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.mockito.Mockito.verify;
+
 @RunWith(MockitoJUnitRunner.class)
 public class AccountTest {
 
@@ -15,6 +17,6 @@ public class AccountTest {
     @Test
     public void itName() {
         account.printStatement();
-
+        verify(printer).print();
     }
 }

@@ -2,11 +2,13 @@ package de.egga.banking;
 
 public class Account {
 
-    public Account(Printer printer) {
+    private final Printer printer;
 
+    public Account(Printer printer) {
+        this.printer = printer;
     }
 
     public void printStatement() {
-
+        printer.print();
     }
 }
