@@ -6,21 +6,21 @@ import java.util.List;
 public class Account {
 
     private final Printer printer;
-    private List<Integer>  amounts = new ArrayList<>();
+    private List<Transaction>  transactions = new ArrayList<>();
 
     public Account(Printer printer) {
         this.printer = printer;
     }
 
     public void deposit(int amount) {
-        amounts.add(amount);
+        transactions.add(new Transaction(amount));
     }
 
     public void printStatement() {
         int balance = 0;
 
-        for (Integer amount : amounts) {
-            balance += amount;
+        for (Transaction transaction : transactions) {
+            balance += transaction.amount;
         }
 
         printer.print(balance);

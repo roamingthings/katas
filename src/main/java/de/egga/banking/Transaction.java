@@ -2,7 +2,7 @@ package de.egga.banking;
 
 public class Transaction {
 
-    private final int amount;
+    public final int amount;
 
     public Transaction(int amount) {
         this.amount = amount;
