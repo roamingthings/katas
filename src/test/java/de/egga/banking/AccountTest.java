@@ -19,4 +19,18 @@ public class AccountTest {
         account.printStatement();
         verify(printer).print(0);
     }
+
+    @Test
+    public void print_statement_should_print_deposited_amounts() {
+        account.deposit(100);
+        account.printStatement();
+        verify(printer).print(100);
+    }
+    @Test
+    public void print_statement_should_print_sum_of_deposited_amounts() {
+        account.deposit(100);
+        account.deposit(100);
+        account.printStatement();
+        verify(printer).print(200);
+    }
 }
