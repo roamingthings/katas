@@ -17,4 +17,11 @@ public class AmountTest {
         Amount amount = new Amount(11);
         assertThat(amount).isNotEqualTo(new Amount(12));
     }
+
+    @Test
+    public void it_should_add_amounts() {
+
+        Amount sum = new Amount(1).add(new Amount(3));
+        assertThat(sum).isEqualTo(new Amount(4));
+    }
 }
