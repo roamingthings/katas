@@ -2,6 +2,11 @@ package de.egga.banking;
 
 public class Amount {
 
+    public static Amount amount(int amount) {
+        return new Amount(amount);
+    }
+
+
     private final Integer amount;
 
     public Amount(int amount) {
