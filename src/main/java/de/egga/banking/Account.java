@@ -18,11 +18,12 @@ public class Account {
 
     public void printStatement() {
         int balance = 0;
+        Amount balance2 = new Amount(0);
 
         for (Transaction transaction : transactions) {
-            balance += transaction.amount;
+            balance2 = balance2.add(transaction.amount);
         }
 
-        printer.print(balance);
+        printer.print(balance2.print());
     }
 }

@@ -2,12 +2,10 @@ package de.egga.banking;
 
 public class Transaction {
 
-    public final int amount;
-    public final Amount amount2;
+    public final Amount amount;
 
     public Transaction(int amount) {
-        this.amount = amount;
-        this.amount2 = new Amount(amount);
+        this.amount = new Amount(amount);
     }
 
     @Override
@@ -17,12 +15,12 @@ public class Transaction {
 
         Transaction that = (Transaction) o;
 
-        return amount2.equals(that.amount2);
+        return amount.equals(that.amount);
 
     }
 
     @Override
     public int hashCode() {
-        return amount;
+        return amount.hashCode();
     }
 }

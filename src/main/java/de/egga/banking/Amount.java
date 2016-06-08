@@ -21,4 +21,12 @@ public class Amount {
     public int hashCode() {
         return amount;
     }
+
+    public Amount add(Amount amount) {
+        return new Amount(this.amount + amount.amount);
+    }
+
+    public String print() {
+        return amount + "";
+    }
 }
