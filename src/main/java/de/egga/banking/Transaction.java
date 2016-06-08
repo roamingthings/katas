@@ -3,9 +3,11 @@ package de.egga.banking;
 public class Transaction {
 
     public final int amount;
+    public final Amount amount2;
 
     public Transaction(int amount) {
         this.amount = amount;
+        this.amount2 = new Amount(amount);
     }
 
     @Override
@@ -15,7 +17,7 @@ public class Transaction {
 
         Transaction that = (Transaction) o;
 
-        return amount == that.amount;
+        return amount2.equals(that.amount2);
 
     }
 
