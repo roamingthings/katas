@@ -7,6 +7,7 @@ public class AccountTest {
     @Test
     public void itName() {
         Account account = new Account();
+        Printer printer = new Printer();
         account.printStatement();
     }
 }
