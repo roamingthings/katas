@@ -1,8 +1,8 @@
-package de.egga.banking;
+package de.egga;
 
 import org.junit.Test;
 
-import static de.egga.banking.Amount.amount;
+import static de.egga.Amount.amount;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AmountTest {

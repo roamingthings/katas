@@ -1,4 +1,4 @@
-package de.egga.bowling._001;
+package de.egga;
 
 import org.junit.Test;
 

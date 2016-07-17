@@ -1,11 +1,10 @@
-package de.egga.bowling._001;
+package de.egga;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static de.egga.bowling._001.Frame.defaultFrame;
-import static de.egga.bowling._001.Frame.frameAfterSpare;
-import static de.egga.bowling._001.Frame.frameAfterStrike;
+import static de.egga.Frame.defaultFrame;
+import static de.egga.Frame.*;
 
 public class Game {
 

@@ -1,4 +1,4 @@
-package de.egga.banking;
+package de.egga;
 
 public class Amount {
 

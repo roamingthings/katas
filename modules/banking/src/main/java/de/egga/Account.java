@@ -1,9 +1,9 @@
-package de.egga.banking;
+package de.egga;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static de.egga.banking.Amount.amount;
+import static de.egga.Amount.amount;
 
 public class Account {
 
