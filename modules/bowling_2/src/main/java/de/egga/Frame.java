@@ -1,4 +1,4 @@
-package de.egga.bowling._002;
+package de.egga;
 
 import java.util.ArrayList;
 import java.util.List;

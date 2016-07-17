@@ -1,4 +1,4 @@
-package de.egga.bowling._002;
+package de.egga;
 
 public class FrameAfterStrike extends Frame {
 
