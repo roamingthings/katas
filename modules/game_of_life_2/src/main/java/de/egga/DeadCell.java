@@ -1,4 +1,4 @@
-package de.egga.game_of_life2;
+package de.egga;
 
 public class DeadCell extends Cell {
 

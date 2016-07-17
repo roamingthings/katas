@@ -1,4 +1,4 @@
-package de.egga.game_of_life2;
+package de.egga;
 
 public abstract class  Cell {
     Cell iterate(int aliveNeighbors) {
