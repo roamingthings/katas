@@ -2,7 +2,7 @@ package de.egga;
 
 import org.junit.Test;
 
-import static de.egga.iban.Validator.isIban;
+import static de.egga.Validator.isIban;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ValidatorTest {

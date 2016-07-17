@@ -1,5 +1,6 @@
 package de.egga;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
@@ -18,6 +19,6 @@ public class Game {
             }
 
         }
-        return null;
+        return new ArrayList<>();
     }
 }

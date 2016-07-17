@@ -2,7 +2,7 @@ package de.egga;
 
 import org.junit.Test;
 
-import static de.egga.iban.CharacterValidator.isLetter;
+import static de.egga.CharacterValidator.isLetter;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CharacterValidatorTest {
