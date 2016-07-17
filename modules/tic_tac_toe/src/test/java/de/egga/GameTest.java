@@ -1,8 +1,9 @@
-package de.egga.tic_tac_toe;
+package de.egga;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
-import static de.egga.tic_tac_toe.Position.CENTER;
+import static de.egga.Position.CENTER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GameTest {
@@ -14,6 +15,7 @@ public class GameTest {
     }
 
     @Test
+    @Ignore
     public void itName2() {
         Game game = new Game();
         moveSequence(game, CENTER);

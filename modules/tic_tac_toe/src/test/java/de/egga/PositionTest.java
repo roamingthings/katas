@@ -1,4 +1,4 @@
-package de.egga.tic_tac_toe;
+package de.egga;
 
 import org.junit.Test;
 
