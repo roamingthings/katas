@@ -1,4 +1,4 @@
-package de.egga.game_of_life;
+package de.egga;
 
 public class Printer {
     public void print(Board board) {

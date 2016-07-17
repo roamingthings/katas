@@ -1,4 +1,4 @@
-package de.egga.game_of_life;
+package de.egga;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package de.egga.game_of_life;
+package de.egga;
 
 import java.util.ArrayList;
 import java.util.List;
