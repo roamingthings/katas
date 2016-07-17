@@ -1,4 +1,4 @@
-package de.egga.iban;
+package de.egga;
 
 import org.junit.Test;
 
