@@ -1,4 +1,4 @@
-package de.egga.leap_year;
+package de.egga;
 
 public class LeapYearChecker {
 
