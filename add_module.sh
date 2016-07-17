@@ -25,6 +25,3 @@ echo "findProject(':modules:$NAME')?.name = '$NAME'" >> settings.gradle
 
 cp -r modules/template/* $TARGET/
 
-
-tree modules
-cat settings.gradle

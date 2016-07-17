@@ -1,4 +1,4 @@
-package de.egga.bowling._003;
+package de.egga;
 
 public class FrameMapper {
 }
