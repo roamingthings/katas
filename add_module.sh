@@ -1,15 +1,33 @@
 #!/bin/bash
 
-set -ex
+set -e
 
-NAME=template
+echo "What's the name of the module to be created? Abort by pressing [ENTER]:"
+read NAME
+
+if [ "$NAME" == '' ]; then
+  echo "Cancelled..."
+  exit 1
+fi
+
 ROOT=modules/
+TARGET=$ROOT$NAME
 
-mkdir -p $ROOT$NAME/src/main/java/de/egga
-mkdir -p $ROOT$NAME/src/test/java/de/egga
-touch $ROOT$NAME/build.gradle
+if [ -d "$TARGET" ]; then
+  echo "Module already exists..."
+  exit 1
+fi
+
+
+mkdir -p $TARGET/src/main/java/de/egga
+mkdir -p $TARGET/src/test/java/de/egga
+
+touch $TARGET/build.gradle
+
 echo "include 'modules:$NAME'" >> settings.gradle
 echo "findProject(':modules:$NAME')?.name = '$NAME'" >> settings.gradle
+
+cp -r modules/template/* $TARGET/
 
 
 tree modules
