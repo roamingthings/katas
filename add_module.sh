@@ -18,11 +18,7 @@ if [ -d "$TARGET" ]; then
   exit 1
 fi
 
-
-mkdir -p $TARGET/src/main/java/de/egga
-mkdir -p $TARGET/src/test/java/de/egga
-
-touch $TARGET/build.gradle
+mkdir $TARGET
 
 echo "include 'modules:$NAME'" >> settings.gradle
 echo "findProject(':modules:$NAME')?.name = '$NAME'" >> settings.gradle
