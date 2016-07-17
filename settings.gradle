@@ -1,2 +1,4 @@
 include 'modules:template'
 findProject(':modules:template')?.name = 'template'
+include 'modules:banking'
+findProject(':modules:banking')?.name = 'banking'
