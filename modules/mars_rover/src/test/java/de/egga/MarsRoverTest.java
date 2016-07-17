@@ -1,9 +1,13 @@
-package de.egga.mars_rover;
+package de.egga;
 
 import org.junit.Test;
 
-import static de.egga.mars_rover.Direction.*;
-import static de.egga.mars_rover.Point.point;
+import static de.egga.Direction.EAST;
+import static de.egga.Direction.NORTH;
+import static de.egga.Direction.SOUTH;
+import static de.egga.Point.point;
+import static de.egga.Direction.*;
+import static de.egga.Point.point;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MarsRoverTest {

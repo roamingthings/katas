@@ -1,8 +1,8 @@
-package de.egga.mars_rover;
+package de.egga;
 
-import com.google.common.base.Objects;
+import java.util.Objects;
 
-import static de.egga.mars_rover.Direction.*;
+import static de.egga.Direction.*;
 
 public class Point {
 
@@ -48,7 +48,7 @@ public class Point {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(x, y);
+        return Objects.hashCode(this);
     }
 
     @Override

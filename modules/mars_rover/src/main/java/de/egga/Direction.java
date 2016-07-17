@@ -1,4 +1,4 @@
-package de.egga.mars_rover;
+package de.egga;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,9 +1,9 @@
-package de.egga.mars_rover;
+package de.egga;
 
 import org.junit.Test;
 
-import static de.egga.mars_rover.Direction.*;
-import static org.assertj.core.api.StrictAssertions.assertThat;
+import static de.egga.Direction.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DirectionTest {
 
