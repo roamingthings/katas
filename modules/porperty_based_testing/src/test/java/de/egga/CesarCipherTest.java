@@ -11,6 +11,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CesarCipherTest {
 
     Random random = new Random();
+    private String generateRandomString(List<Character> characters, int stringLength) {
+        String randomString = "";
+        for (int j = 0; j < stringLength; j++) {
+            randomString += characters.get(random.nextInt(characters.size()));
+        }
+        return randomString;
+    }
+
+    private int getRandomNotEmptyString() {
+        return random.nextInt(10) + 1;
+    }
+
     List<Character> characters = asList('A', 'B', 'C', 'N', 'O', 'P');
 
     @Test
@@ -18,7 +30,7 @@ public class CesarCipherTest {
 
         for (int i = 0; i < 100000; i++) {
             int stringLength = getRandomNotEmptyString();
-            String plaintext = createRandomString(characters, stringLength);
+            String plaintext = generateRandomString(characters, stringLength);
 
             String ciphertext = encrypt(plaintext);
             assertThat(ciphertext).isNotEqualTo(plaintext);
@@ -30,7 +42,7 @@ public class CesarCipherTest {
 
         for (int i = 0; i < 100000; i++) {
             int stringLength = getRandomNotEmptyString();
-            String plaintext = createRandomString(characters, stringLength);
+            String plaintext = generateRandomString(characters, stringLength);
 
             String ciphertext = encrypt(encrypt(plaintext));
             assertThat(ciphertext).isEqualTo(plaintext);
@@ -39,27 +51,29 @@ public class CesarCipherTest {
 
     @Test
     public void ciphertext_should_not_contain_the_plaintext() {
-
         for (int i = 0; i < 100000; i++) {
             int stringLength = getRandomNotEmptyString();
-            String plaintext = createRandomString(characters, stringLength);
+            String plaintext = generateRandomString(characters, stringLength);
 
             String ciphertext = encrypt(plaintext);
             assertThat(ciphertext).doesNotContain(plaintext);
         }
     }
 
-    private int getRandomNotEmptyString() {
-        return random.nextInt(10) + 1;
+    @Test
+    public void non_alphabet_characters_should_be_unchanged() {
+        for (int i = 0; i < 100000; i++) {
+
+
+            int stringLength = getRandomNotEmptyString();
+            String plaintext = generateRandomString(characters, stringLength);
+
+            String ciphertext = encrypt(plaintext);
+            assertThat(ciphertext).doesNotContain(plaintext);
+        }
     }
 
-    private String createRandomString(List<Character> characters, int stringLength) {
-        String randomString = "";
-        for (int j = 0; j < stringLength; j++) {
-            randomString += characters.get(random.nextInt(characters.size()));
-        }
-        return randomString;
-    }
+
 
     private String encrypt(String plaintext) {
         String ciphertext = "";
