@@ -17,7 +17,7 @@ public class CesarCipherTest {
     public void encrypt_should_change_the_plaintext() {
 
         for (int i = 0; i < 100000; i++) {
-            int stringLength = random.nextInt(10);
+            int stringLength = getRandomNotEmptyString();
             String plaintext = createRandomString(characters, stringLength);
 
             String ciphertext = encrypt(plaintext);
@@ -29,12 +29,28 @@ public class CesarCipherTest {
     public void encrypting_twice_should_return_the_plaintext() {
 
         for (int i = 0; i < 100000; i++) {
-            int stringLength = random.nextInt(10);
+            int stringLength = getRandomNotEmptyString();
             String plaintext = createRandomString(characters, stringLength);
 
             String ciphertext = encrypt(encrypt(plaintext));
             assertThat(ciphertext).isEqualTo(plaintext);
         }
+    }
+
+    @Test
+    public void ciphertext_should_not_contain_the_plaintext() {
+
+        for (int i = 0; i < 100000; i++) {
+            int stringLength = getRandomNotEmptyString();
+            String plaintext = createRandomString(characters, stringLength);
+
+            String ciphertext = encrypt(plaintext);
+            assertThat(ciphertext).doesNotContain(plaintext);
+        }
+    }
+
+    private int getRandomNotEmptyString() {
+        return random.nextInt(10) + 1;
     }
 
     private String createRandomString(List<Character> characters, int stringLength) {
@@ -46,10 +62,18 @@ public class CesarCipherTest {
     }
 
     private String encrypt(String plaintext) {
+        String ciphertext = "";
 
-        if (plaintext.endsWith("something")) {
-            return plaintext.replace("something", "");
+        for (char plaintextCharacter : plaintext.toCharArray()) {
+
+            int offset = plaintextCharacter - 'A';
+            int shift = offset + 13;
+            int cipherOffset = shift % 26;
+
+            char ciphertextCharacter = (char) ('A' + cipherOffset);
+            ciphertext += ciphertextCharacter;
         }
-        return plaintext + "something";
+
+        return ciphertext;
     }
 }
