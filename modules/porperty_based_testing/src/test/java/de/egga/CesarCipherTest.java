@@ -72,10 +72,11 @@ public class CesarCipherTest {
     }
 
     private char encryptCharacter(char plaintextCharacter) {
-        int offset = plaintextCharacter - 'A';
-        int shift = offset + 13;
-        int cipherOffset = shift %  26;
+        List<Character> characters = asList('A', 'B', 'C', 'N', 'O', 'P');
+        int alphabetLength = characters.size();
+        int index = characters.indexOf(plaintextCharacter);
+        int cipherIndex = (index +  alphabetLength / 2) % alphabetLength;
 
-        return (char) ('A' + cipherOffset);
+        return characters.get(cipherIndex);
     }
 }
