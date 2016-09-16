@@ -65,15 +65,17 @@ public class CesarCipherTest {
         String ciphertext = "";
 
         for (char plaintextCharacter : plaintext.toCharArray()) {
-
-            int offset = plaintextCharacter - 'A';
-            int shift = offset + 13;
-            int cipherOffset = shift % 26;
-
-            char ciphertextCharacter = (char) ('A' + cipherOffset);
-            ciphertext += ciphertextCharacter;
+            ciphertext += encryptCharacter(plaintextCharacter);
         }
 
         return ciphertext;
+    }
+
+    private char encryptCharacter(char plaintextCharacter) {
+        int offset = plaintextCharacter - 'A';
+        int shift = offset + 13;
+        int cipherOffset = shift %  26;
+
+        return (char) ('A' + cipherOffset);
     }
 }
