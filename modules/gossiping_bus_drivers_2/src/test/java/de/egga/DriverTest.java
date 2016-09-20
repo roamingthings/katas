@@ -53,7 +53,7 @@ public class DriverTest {
     }
 
 
-    private void assertThatBothDriversKnowEachOthersGossips(Driver driver, Driver other) {
+    public static void assertThatBothDriversKnowEachOthersGossips(Driver driver, Driver other) {
         SoftAssertions assertions = new SoftAssertions();
         assertions.assertThat(driver.knowsGossipsOf(other)).isTrue();
         assertions.assertThat(other.knowsGossipsOf(driver)).isTrue();
