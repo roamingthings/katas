@@ -2,27 +2,26 @@ package de.egga;
 
 import org.junit.Test;
 
-import static de.egga.DriverTest.anyDriver;
 import static org.assertj.core.api.StrictAssertions.assertThat;
 
-public class CoachTest {
+public class RouteTest {
 
     public static final int FIRST_STOP = 1;
     public static final int SECOND_STOP = 2;
 
     @Test
     public void coach_should_be_at_first_stop() {
-        Coach coach = new Coach(anyDriver(), anyRoute());
+        Route route = new Route(anyRoute());
 
-        assertThat(coach.isAtStop(FIRST_STOP)).isTrue();
+        assertThat(route.isAtStop(FIRST_STOP)).isTrue();
     }
 
     @Test
     public void coach_should_proceed_to_second_stop() {
-        Coach coach = new Coach(anyDriver(), anyRoute());
-        coach.proceed();
-        assertThat(coach.isAtStop(FIRST_STOP)).isFalse();
-        assertThat(coach.isAtStop(SECOND_STOP)).isTrue();
+        Route route = new Route(anyRoute());
+        route.proceed();
+        assertThat(route.isAtStop(FIRST_STOP)).isFalse();
+        assertThat(route.isAtStop(SECOND_STOP)).isTrue();
     }
 
 
