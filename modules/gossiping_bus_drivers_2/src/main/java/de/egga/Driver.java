@@ -1,14 +1,14 @@
 package de.egga;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Driver {
 
-    private final List<Driver> gossips= new ArrayList<>();
+    private final Set<Driver> gossips = new HashSet<>();
 
     public Driver() {
-        this.addGossip(this);
+        gossips.add(this);
     }
 
     public void exchangeGossips(Driver other) {
@@ -22,6 +22,6 @@ public class Driver {
 
 
     private void addGossip(Driver other) {
-        gossips.add(other);
+        gossips.addAll(other.gossips);
     }
 }

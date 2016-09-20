@@ -14,7 +14,7 @@ public class DriverTest {
 
         driver.exchangeGossips(other);
 
-        assertThatBothDriversKnowEachOthersGOssips(driver, other);
+        assertThatBothDriversKnowEachOthersGossips(driver, other);
     }
 
     @Test
@@ -25,14 +25,29 @@ public class DriverTest {
     }
 
     @Test
-    public void driver_should_not_know_own_gossip() {
+    public void driver_should_know_own_gossip() {
         Driver driver = new Driver();
 
         assertThat(driver.knowsGossipsOf(driver)).isTrue();
     }
 
+    @Test
+    public void both_drivers_should_learn_each_others_gossips2() {
+        Driver driver1 = new Driver();
+        Driver driver2 = new Driver();
+        Driver driver3 = new Driver();
 
-    private void assertThatBothDriversKnowEachOthersGOssips(Driver driver, Driver other) {
+        driver1.exchangeGossips(driver2);
+        driver1.exchangeGossips(driver3);
+
+        assertThatBothDriversKnowEachOthersGossips(driver1, driver2);
+        assertThatBothDriversKnowEachOthersGossips(driver1, driver3);
+        assertThat(driver2.knowsGossipsOf(driver3)).isFalse();
+        assertThat(driver3.knowsGossipsOf(driver2)).isTrue();
+    }
+
+
+    private void assertThatBothDriversKnowEachOthersGossips(Driver driver, Driver other) {
         SoftAssertions assertions = new SoftAssertions();
         assertions.assertThat(driver.knowsGossipsOf(other)).isTrue();
         assertions.assertThat(other.knowsGossipsOf(driver)).isTrue();
