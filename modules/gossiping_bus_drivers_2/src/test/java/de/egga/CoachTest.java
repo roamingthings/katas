@@ -18,12 +18,13 @@ public class CoachTest {
     }
 
     @Test
-    public void asd() {
+    public void coach_should_proceed_to_second_stop() {
         Coach coach = new Coach(anyDriver(), anyRoute());
         coach.proceed();
         assertThat(coach.isAtStop(FIRST_STOP)).isFalse();
         assertThat(coach.isAtStop(SECOND_STOP)).isTrue();
     }
+
 
     private Integer[] anyRoute() {
         return new Integer[]{FIRST_STOP, SECOND_STOP, 3};
