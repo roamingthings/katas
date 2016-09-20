@@ -9,8 +9,8 @@ public class DriverTest {
 
     @Test
     public void both_drivers_should_learn_each_others_gossips() {
-        Driver driver = new Driver();
-        Driver other = new Driver();
+        Driver driver = anyDriver();
+        Driver other = anyDriver();
 
         driver.exchangeGossips(other);
 
@@ -19,23 +19,23 @@ public class DriverTest {
 
     @Test
     public void driver_should_not_know_gossip_of_other() {
-        Driver driver = new Driver();
+        Driver driver = anyDriver();
 
-        assertThat(driver.knowsGossipsOf(new Driver())).isFalse();
+        assertThat(driver.knowsGossipsOf(anyDriver())).isFalse();
     }
 
     @Test
     public void driver_should_know_own_gossip() {
-        Driver driver = new Driver();
+        Driver driver = anyDriver();
 
         assertThat(driver.knowsGossipsOf(driver)).isTrue();
     }
 
     @Test
-    public void both_drivers_should_learn_each_others_gossips2() {
-        Driver driver1 = new Driver();
-        Driver driver2 = new Driver();
-        Driver driver3 = new Driver();
+    public void driver_should_tell_all_the_gossips_learned_so_far() {
+        Driver driver1 = anyDriver();
+        Driver driver2 = anyDriver();
+        Driver driver3 = anyDriver();
 
         driver1.exchangeGossips(driver2);
         driver1.exchangeGossips(driver3);
@@ -44,6 +44,12 @@ public class DriverTest {
         assertThatBothDriversKnowEachOthersGossips(driver1, driver3);
         assertThat(driver2.knowsGossipsOf(driver3)).isFalse();
         assertThat(driver3.knowsGossipsOf(driver2)).isTrue();
+    }
+
+
+
+    public static Driver anyDriver() {
+        return new Driver();
     }
 
 
