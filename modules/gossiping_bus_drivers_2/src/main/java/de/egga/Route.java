@@ -22,4 +22,8 @@ public class Route {
     public void proceed() {
         currentStop = stops.next();
     }
+
+    public boolean isAtSameStop(Route other) {
+        return this.currentStop == other.currentStop;
+    }
 }

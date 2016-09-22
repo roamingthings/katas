@@ -9,12 +9,12 @@ public class DriverTest {
 
     @Test
     public void both_drivers_should_learn_each_others_gossips() {
-        Driver driver = anyDriver();
+        Driver thisDriver = anyDriver();
         Driver other = anyDriver();
 
-        driver.exchangeGossips(other);
+        thisDriver.exchangeGossips(other);
 
-        assertThatBothDriversKnowEachOthersGossips(driver, other);
+        assertThatBothDriversKnowEachOthersGossips(thisDriver, other);
     }
 
     @Test
@@ -57,6 +57,12 @@ public class DriverTest {
         SoftAssertions assertions = new SoftAssertions();
         assertions.assertThat(driver.knowsGossipsOf(other)).isTrue();
         assertions.assertThat(other.knowsGossipsOf(driver)).isTrue();
+        assertions.assertAll();
+    }
+    public static void assertThatBothDriversDoNotKnowEachOthersGossips(Driver driver, Driver other) {
+        SoftAssertions assertions = new SoftAssertions();
+        assertions.assertThat(driver.knowsGossipsOf(other)).isFalse();
+        assertions.assertThat(other.knowsGossipsOf(driver)).isFalse();
         assertions.assertAll();
     }
 
