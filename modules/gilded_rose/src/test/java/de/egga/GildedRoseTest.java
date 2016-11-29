@@ -1,5 +1,6 @@
 package de.egga;
 
+import de.egga.items.Item;
 import org.junit.Test;
 
 import static de.egga.Constants.AGED_BRIE;

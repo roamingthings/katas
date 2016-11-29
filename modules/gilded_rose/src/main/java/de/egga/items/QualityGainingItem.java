@@ -1,4 +1,4 @@
-package de.egga;
+package de.egga.items;
 
 public class QualityGainingItem extends BaseItem {
 

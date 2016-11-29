@@ -1,5 +1,8 @@
 package de.egga;
 
+import de.egga.items.Item;
+import de.egga.items.ItemFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
