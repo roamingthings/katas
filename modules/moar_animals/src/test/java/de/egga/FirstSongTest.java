@@ -8,7 +8,7 @@ import java.io.UnsupportedEncodingException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SongTest {
+public class FirstSongTest {
 
     PrintStream originalStandardOut = System.out;
 
@@ -17,7 +17,7 @@ public class SongTest {
 
         ByteArrayOutputStream capturedOutput = captureStandardOut();
 
-        Song.main(anyArgs());
+        FirstSong.main(anyArgs());
 
         setStandardOutBackToOriginal();
 
