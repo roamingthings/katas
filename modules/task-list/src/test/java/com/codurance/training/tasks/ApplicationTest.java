@@ -80,6 +80,9 @@ public final class ApplicationTest {
         execute("check 5");
         execute("check 6");
 
+        execute("check 99999");
+        readLines("Could not find a task with an ID of 99999.");
+
         execute("show");
         readLines(
             "secrets",
@@ -95,6 +98,27 @@ public final class ApplicationTest {
             "    [ ] 8: Interaction-Driven Design",
             ""
         );
+
+        String deadlineDate = "2017-02-02";
+        execute("deadline 1 " + deadlineDate);
+        execute("show");
+        readLines(
+            "secrets",
+            "    [x] 1: Eat more donuts. Deadline: " + deadlineDate,
+            "    [ ] 2: Destroy all humans.",
+            "",
+            "training",
+            "    [x] 3: Four Elements of Simple Design",
+            "    [ ] 4: SOLID",
+            "    [x] 5: Coupling and Cohesion",
+            "    [x] 6: Primitive Obsession",
+            "    [ ] 7: Outside-In TDD",
+            "    [ ] 8: Interaction-Driven Design",
+            ""
+        );
+
+        execute("deadline 99999 " + deadlineDate);
+        readLines("Could not find a task with an ID of 99999.");
 
         execute("quit");
     }

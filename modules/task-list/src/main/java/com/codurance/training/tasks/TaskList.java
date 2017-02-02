@@ -62,6 +62,9 @@ public final class TaskList implements Runnable {
             case "uncheck":
                 uncheck(commandRest[1]);
                 break;
+            case "deadline":
+                deadline(commandRest[1]);
+                break;
             case "help":
                 help();
                 break;
@@ -71,11 +74,23 @@ public final class TaskList implements Runnable {
         }
     }
 
+    private void deadline(String argumentString) {
+        String[] arguments = argumentString.split(" ");
+        String idString = arguments[0];
+        Task task = findTask(idString);
+        if (task == null) {
+            out.printf("Could not find a task with an ID of %s.", idString);
+            out.println();
+        } else {
+            task.setDeadline(arguments[1]);
+        }
+    }
+
     private void show() {
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
             out.println(project.getKey());
             for (Task task : project.getValue()) {
-                out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
+                out.print(task.toString());
             }
             out.println();
         }
@@ -115,17 +130,25 @@ public final class TaskList implements Runnable {
     }
 
     private void setDone(String idString, boolean done) {
-        int id = Integer.parseInt(idString);
+        Task task = findTask(idString);
+        if (task == null) {
+            out.printf("Could not find a task with an ID of %s.", idString);
+            out.println();
+        } else {
+            task.setDone(done);
+        }
+    }
+
+    private Task findTask(String idString) {
+        long id = Long.valueOf(idString);
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
             for (Task task : project.getValue()) {
                 if (task.getId() == id) {
-                    task.setDone(done);
-                    return;
+                    return task;
                 }
             }
         }
-        out.printf("Could not find a task with an ID of %d.", id);
-        out.println();
+        return null;
     }
 
     private void help() {
