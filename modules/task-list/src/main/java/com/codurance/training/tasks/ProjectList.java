@@ -4,12 +4,12 @@ import java.util.*;
 
 import static java.lang.Long.valueOf;
 
-public class ProjectList {
+class ProjectList {
 
-    final List<Project> projects = new ArrayList<>();
+    private final List<Project> projects = new ArrayList<>();
     private long lastId = 0;
 
-    Project getProjectByName(String projectName) {
+    private Project getProjectByName(String projectName) {
         Optional<Project> project = projects
             .stream()
             .filter(p -> p.getName().equals(projectName))
@@ -18,12 +18,12 @@ public class ProjectList {
         return project.orElseThrow(ProjectNotFoundException::new);
     }
 
-    void add(String name) {
-        projects.add(new Project(name));
+    void add(String projectName) {
+        projects.add(new Project(projectName));
     }
 
 
-    Task getTaskById(String idString) {
+    private Task getTaskById(String idString) {
         long id = valueOf(idString);
         for (Project project : projects) {
             for (Task task : project.getTasks()) {
@@ -36,21 +36,21 @@ public class ProjectList {
         throw new TaskNotFoundException();
     }
 
-    List<Project> getProjects() {
+    private List<Project> getProjects() {
         return projects;
     }
 
-    void setDeadline(String idString, String date) {
-        Task task = getTaskById(idString);
+    void setDeadline(String taskId, String date) {
+        Task task = getTaskById(taskId);
         task.setDeadline(date);
     }
 
-    public void setDone(String idString, boolean done) {
-        Task task = getTaskById(idString);
+    void setDone(String taskId, boolean done) {
+        Task task = getTaskById(taskId);
         task.setDone(done);
     }
 
-    public void addTask(String projectName, String description) {
+    void addTask(String projectName, String description) {
         Project project = getProjectByName(projectName);
         project.addTask(new Task(nextId(), description, false));
     }
