@@ -92,7 +92,7 @@ public final class Application implements Runnable {
         String[] subcommandRest = commandLine.split(" ", 2);
         String subcommand = subcommandRest[0];
         if (subcommand.equals("project")) {
-            projectList.add(subcommandRest[1]);
+            projectList.addProject(subcommandRest[1]);
         } else if (subcommand.equals("task")) {
             String[] projectTask = subcommandRest[1].split(" ", 2);
             addTask(projectTask[0], projectTask[1]);
@@ -139,5 +139,4 @@ public final class Application implements Runnable {
         out.printf("I don't know what the command \"%s\" is.", command);
         out.println();
     }
-
 }

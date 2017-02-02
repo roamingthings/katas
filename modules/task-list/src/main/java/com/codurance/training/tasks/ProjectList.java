@@ -9,6 +9,27 @@ class ProjectList {
     private final List<Project> projects = new ArrayList<>();
     private long lastId = 0;
 
+
+    void addProject(String projectName) {
+        projects.add(new Project(projectName));
+    }
+
+    void addTask(String projectName, String description) {
+        Project project = getProjectByName(projectName);
+        project.addTask(new Task(nextId(), description, false));
+    }
+
+    void setDone(String taskId, boolean done) {
+        Task task = getTaskById(taskId);
+        task.setDone(done);
+    }
+
+    void setDeadline(String taskId, String date) {
+        Task task = getTaskById(taskId);
+        task.setDeadline(date);
+    }
+
+
     private Project getProjectByName(String projectName) {
         Optional<Project> project = projects
             .stream()
@@ -17,11 +38,6 @@ class ProjectList {
 
         return project.orElseThrow(ProjectNotFoundException::new);
     }
-
-    void add(String projectName) {
-        projects.add(new Project(projectName));
-    }
-
 
     private Task getTaskById(String idString) {
         long id = valueOf(idString);
@@ -40,24 +56,10 @@ class ProjectList {
         return projects;
     }
 
-    void setDeadline(String taskId, String date) {
-        Task task = getTaskById(taskId);
-        task.setDeadline(date);
-    }
-
-    void setDone(String taskId, boolean done) {
-        Task task = getTaskById(taskId);
-        task.setDone(done);
-    }
-
-    void addTask(String projectName, String description) {
-        Project project = getProjectByName(projectName);
-        project.addTask(new Task(nextId(), description, false));
-    }
-
     private long nextId() {
         return ++lastId;
     }
+
 
     @Override
     public String toString() {
