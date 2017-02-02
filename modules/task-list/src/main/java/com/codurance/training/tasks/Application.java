@@ -12,7 +12,6 @@ public final class Application implements Runnable {
     private final PrintWriter out;
     private final ProjectList projectList;
 
-    private long lastId = 0;
 
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -73,24 +72,20 @@ public final class Application implements Runnable {
 
     private void deadline(String argumentString) {
         String[] arguments = argumentString.split(" ");
-        String idString = arguments[0];
-        Task task = projectList.getTaskById(idString);
-        if (task == null) {
-            out.printf("Could not find a task with an ID of %s.", idString);
+        String taskId = arguments[0];
+        String date = arguments[1];
+
+        try {
+            projectList.setDeadline(taskId, date);
+
+        } catch (TaskNotFoundException e) {
+            out.printf("Could not find a task with an ID of %s.", taskId);
             out.println();
-        } else {
-            task.setDeadline(arguments[1]);
         }
     }
 
     private void show() {
-        for (Project project : projectList.getProjects()) {
-            out.println(project.getName());
-            for (Task task : project.getTasks()) {
-                out.print(task.toString());
-            }
-            out.println();
-        }
+        out.print(projectList.toString());
     }
 
     private void add(String commandLine) {
@@ -105,30 +100,28 @@ public final class Application implements Runnable {
     }
 
     private void addTask(String projectName, String description) {
-        Project project = projectList.getProjectByName(projectName);
-        if (project == null) {
+        try {
+            projectList.addTask(projectName, description);
+        } catch (ProjectNotFoundException e) {
             out.printf("Could not find a project with the name \"%s\".", projectName);
             out.println();
-            return;
         }
-        project.addTask(new Task(nextId(), description, false));
     }
 
-    private void check(String idString) {
-        setDone(idString, true);
+    private void check(String taskId) {
+        setDone(taskId, true);
     }
 
-    private void uncheck(String idString) {
-        setDone(idString, false);
+    private void uncheck(String taskId) {
+        setDone(taskId, false);
     }
 
-    private void setDone(String idString, boolean done) {
-        Task task = projectList.getTaskById(idString);
-        if (task == null) {
-            out.printf("Could not find a task with an ID of %s.", idString);
+    private void setDone(String taskId, boolean done) {
+        try {
+            projectList.setDone(taskId, done);
+        } catch (TaskNotFoundException e) {
+            out.printf("Could not find a task with an ID of %s.", taskId);
             out.println();
-        } else {
-            task.setDone(done);
         }
     }
 
@@ -145,10 +138,6 @@ public final class Application implements Runnable {
     private void error(String command) {
         out.printf("I don't know what the command \"%s\" is.", command);
         out.println();
-    }
-
-    private long nextId() {
-        return ++lastId;
     }
 
 }
