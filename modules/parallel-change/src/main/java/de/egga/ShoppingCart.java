@@ -1,22 +1,31 @@
 package de.egga;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.util.stream.Collectors.summingInt;
+
 public class ShoppingCart {
-    private int price;
+
+    private List<Integer> prices = new ArrayList<>();
 
     public void add(int price) {
-        this.price = price;
+        prices.add(price);
     }
 
     public int calculateTotalPrice() {
-        return price;
+        return prices.stream().collect(summingInt(p -> p));
     }
 
     public boolean hasDiscount() {
-        return price >= 100;
+        return prices.stream()
+            .filter(p -> p >= 100)
+            .findFirst()
+            .isPresent();
     }
 
     public int numberOfProducts() {
-        return 1;
+        return prices.size();
     }
 }
