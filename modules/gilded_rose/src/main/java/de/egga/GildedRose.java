@@ -1,11 +1,11 @@
 package de.egga;
 
 import de.egga.items.Item;
-import de.egga.items.ItemFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static de.egga.items.ItemFactory.createItem;
 import static java.util.Arrays.asList;
 
 class GildedRose {
@@ -18,7 +18,7 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            ItemFactory.createItem(item).update();
+            createItem(item).update();
         }
     }
 
