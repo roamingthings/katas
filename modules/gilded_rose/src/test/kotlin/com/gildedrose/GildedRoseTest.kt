@@ -1,27 +1,17 @@
 package com.gildedrose
 
-import com.gildedrose.Constants.AGED_BRIE
-import com.gildedrose.Constants.BACKSTAGE_PASSES
-import com.gildedrose.Constants.SULFURAS
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-object Constants {
-
-    val SULFURAS = "Sulfuras, Hand of Ragnaros"
-
-    val AGED_BRIE = "Aged Brie"
-
-    val BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert"
-
-    val TOP_QUALITY = 50
-
-}
+const val SULFURAS = "Sulfuras, Hand of Ragnaros"
+const val AGED_BRIE = "Aged Brie"
+const val BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert"
+const val DEFAULT_NAME = "foo"
 
 class GildedRoseTest {
 
     @Test
-    fun it_should_reduce_sell_in_date_to_negative_values() {
+    fun `it should reduce sell in date to negative values`() {
         val sellIn = 0
         val quality = 0
         val app = createShopAndUpdateQuality(sellIn, quality)
@@ -29,7 +19,7 @@ class GildedRoseTest {
     }
 
     @Test
-    fun it_should_reduce_quality_by_one() {
+    fun `it should reduce quality by one`() {
         val sellIn = 5
         val quality = 10
         val app = createShopAndUpdateQuality(sellIn, quality)
@@ -37,7 +27,7 @@ class GildedRoseTest {
     }
 
     @Test
-    fun it_should_reduce_sell_in_date_by_one() {
+    fun `it should reduce sell in date by one`() {
         val sellIn = 5
         val quality = 10
         val app = createShopAndUpdateQuality(sellIn, quality)
@@ -45,7 +35,7 @@ class GildedRoseTest {
     }
 
     @Test
-    fun it_should_reduce_by_two_after_sell_by_date_has_passed() {
+    fun `it should reduce by two after sell by date has passed`() {
         val sellIn = 0
         val quality = 10
         val app = createShopAndUpdateQuality(sellIn, quality)
@@ -53,7 +43,7 @@ class GildedRoseTest {
     }
 
     @Test
-    fun it_should_never_turn_quality_into_negative_values() {
+    fun `it should never turn quality into negative values`() {
         val sellIn = 5
         val quality = 0
         val app = createShopAndUpdateQuality(sellIn, quality)
@@ -61,7 +51,7 @@ class GildedRoseTest {
     }
 
     @Test
-    fun it_should_increase_quality_of_aged_brie() {
+    fun `it should increase quality of aged brie`() {
         val name = AGED_BRIE
         val sellIn = 5
         val quality = 0
@@ -70,7 +60,7 @@ class GildedRoseTest {
     }
 
     @Test
-    fun it_should_not_increase_quality_of_aged_brie_over_fifty() {
+    fun `it should not increase quality of aged brie over fifty`() {
         val name = AGED_BRIE
         val sellIn = 5
         val quality = 50
@@ -79,7 +69,7 @@ class GildedRoseTest {
     }
 
     @Test
-    fun it_should_not_decrease_quality_of_sulfuras() {
+    fun `it should not decrease quality of sulfuras`() {
         val name = SULFURAS
         val sellIn = 5
         val quality = 17
@@ -88,7 +78,7 @@ class GildedRoseTest {
     }
 
     @Test
-    fun it_should_increase_quality_of_backstage_passes_by_one_if_eleven_days_left() {
+    fun `it should increase quality of backstage passes by one if eleven days left`() {
         val name = BACKSTAGE_PASSES
         val sellIn = 11
         val quality = 17
@@ -97,7 +87,7 @@ class GildedRoseTest {
     }
 
     @Test
-    fun it_should_increase_quality_of_backstage_passes_by_two_if_ten_days_left() {
+    fun `it should increase quality of backstage passes by two if ten days left`() {
         val name = BACKSTAGE_PASSES
         val sellIn = 10
         val quality = 17
@@ -106,7 +96,7 @@ class GildedRoseTest {
     }
 
     @Test
-    fun it_should_increase_quality_of_backstage_passes_by_two_if_six_days_left() {
+    fun `it should increase quality of backstage passes by two if six days left`() {
         val name = BACKSTAGE_PASSES
         val sellIn = 6
         val quality = 17
@@ -115,7 +105,7 @@ class GildedRoseTest {
     }
 
     @Test
-    fun it_should_increase_quality_of_backstage_passes_by_three_if_five_days_left() {
+    fun `it should increase quality of backstage passes by three if five days left`() {
         val name = BACKSTAGE_PASSES
         val sellIn = 5
         val quality = 17
@@ -124,7 +114,7 @@ class GildedRoseTest {
     }
 
     @Test
-    fun it_should_drop_quality_of_backstage_passes_to_zero_if_one_day_left() {
+    fun `it should drop quality of backstage passes to zero if one day left`() {
         val name = BACKSTAGE_PASSES
         val sellIn = 1
         val quality = 17
@@ -133,7 +123,7 @@ class GildedRoseTest {
     }
 
     @Test
-    fun it_should_drop_quality_of_backstage_passes_to_zero_if_zero_days_left() {
+    fun `it should drop quality of backstage passes to zero if zero days left`() {
         val name = BACKSTAGE_PASSES
         val sellIn = 0
         val quality = 17
@@ -152,10 +142,5 @@ class GildedRoseTest {
         app.updateQuality()
         return app
     }
-
-    companion object {
-
-        val DEFAULT_NAME = "foo"
-    }
-
 }
+

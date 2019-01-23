@@ -56,4 +56,3 @@ private fun Item.incrementQuality() = if (quality < 50) quality++ else quality
 private fun Item.decrementQuality() = quality--
 
 private fun Item.decrementSellIn() = sellIn--
-
