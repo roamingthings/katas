@@ -4,10 +4,10 @@ class GildedRose(var items: Array<Item>) {
 
     fun updateQuality() {
         for (item in items) {
-            if (isBrie(item) || isBackstage(item)) {
+            if (item.isBrie() || item.isBackstage()) {
                 item.incrementQuality()
 
-                if (isBackstage(item)) {
+                if (item.isBackstage()) {
                     if (item.sellIn < 11) {
                         item.incrementQuality()
                     }
@@ -18,25 +18,25 @@ class GildedRose(var items: Array<Item>) {
                 }
             } else {
                 if (item.quality > 0) {
-                    if (!isSulfuras(item)) {
+                    if (!item.isSulfuras()) {
                         item.decrementQuality()
                     }
                 }
             }
 
-            if (!isSulfuras(item)) {
+            if (!item.isSulfuras()) {
                 item.sellIn = item.sellIn - 1
             }
 
             if (item.sellIn < 0) {
-                if (isBrie(item)) {
+                if (item.isBrie()) {
                     item.incrementQuality()
                 } else {
-                    if (isBackstage(item)) {
+                    if (item.isBackstage()) {
                         item.quality = 0
                     } else {
                         if (item.quality > 0) {
-                            if (!isSulfuras(item)) {
+                            if (!item.isSulfuras()) {
                                 item.decrementQuality()
                             }
                         }
@@ -46,15 +46,15 @@ class GildedRose(var items: Array<Item>) {
         }
     }
 
-    private fun isSulfuras(item: Item) = item.name.equals("Sulfuras, Hand of Ragnaros")
-
-    private fun isBackstage(item: Item) = item.name.equals("Backstage passes to a TAFKAL80ETC concert")
-
-    private fun isBrie(item: Item) = item.name.equals("Aged Brie")
-
 }
 
-fun Item.incrementQuality() = if (this.quality < 50) this.quality++ else this.quality
+private fun Item.isBrie() = name.equals("Aged Brie")
 
-fun Item.decrementQuality() = this.quality--
+private fun Item.isBackstage() = name.equals("Backstage passes to a TAFKAL80ETC concert")
+
+private fun Item.isSulfuras() = name.equals("Sulfuras, Hand of Ragnaros")
+
+private fun Item.incrementQuality() = if (quality < 50) quality++ else quality
+
+private fun Item.decrementQuality() = quality--
 
