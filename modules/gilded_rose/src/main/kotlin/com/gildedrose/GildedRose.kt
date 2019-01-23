@@ -4,48 +4,40 @@ class GildedRose(var items: Array<Item>) {
 
     fun updateQuality() {
         for (item in items) {
-            if (item.name.equals("Aged Brie") || item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                if (item.quality < 50) {
-                    item.incrementQuality()
+            if (isBrie(item) || isBackstage(item)) {
+                item.incrementQuality()
 
-                    if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (item.sellIn < 11) {
-                            if (item.quality < 50) {
-                                item.incrementQuality()
-                            }
-                        }
+                if (isBackstage(item)) {
+                    if (item.sellIn < 11) {
+                        item.incrementQuality()
+                    }
 
-                        if (item.sellIn < 6) {
-                            if (item.quality < 50) {
-                                item.incrementQuality()
-                            }
-                        }
+                    if (item.sellIn < 6) {
+                        item.incrementQuality()
                     }
                 }
             } else {
                 if (item.quality > 0) {
-                    if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                        item.quality = item.quality - 1
+                    if (!isSulfuras(item)) {
+                        item.decrementQuality()
                     }
                 }
             }
 
-            if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
+            if (!isSulfuras(item)) {
                 item.sellIn = item.sellIn - 1
             }
 
             if (item.sellIn < 0) {
-                if (item.name.equals("Aged Brie")) {
-                    if (item.quality < 50) {
-                        item.incrementQuality()
-                    }
+                if (isBrie(item)) {
+                    item.incrementQuality()
                 } else {
-                    if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                    if (isBackstage(item)) {
                         item.quality = 0
                     } else {
                         if (item.quality > 0) {
-                            if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                                item.quality = item.quality - 1
+                            if (!isSulfuras(item)) {
+                                item.decrementQuality()
                             }
                         }
                     }
@@ -54,8 +46,15 @@ class GildedRose(var items: Array<Item>) {
         }
     }
 
+    private fun isSulfuras(item: Item) = item.name.equals("Sulfuras, Hand of Ragnaros")
+
+    private fun isBackstage(item: Item) = item.name.equals("Backstage passes to a TAFKAL80ETC concert")
+
+    private fun isBrie(item: Item) = item.name.equals("Aged Brie")
+
 }
 
-fun Item.incrementQuality() {
-    this.quality++
-}
+fun Item.incrementQuality() = if (this.quality < 50) this.quality++ else this.quality
+
+fun Item.decrementQuality() = this.quality--
+
