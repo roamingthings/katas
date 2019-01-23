@@ -3,42 +3,46 @@ package com.gildedrose
 class GildedRose(var items: Array<Item>) {
 
     fun updateQuality() {
-        for (item in items) {
-            if (item.isBrie() || item.isBackstage()) {
-                item.incrementQuality()
+         for (item in items) {
+             updateItem(item)
+         }
+    }
 
-                if (item.isBackstage()) {
-                    if (item.sellIn < 11) {
-                        item.incrementQuality()
-                    }
+    private fun updateItem(item: Item) {
+        if (item.isBrie() || item.isBackstage()) {
+            item.incrementQuality()
 
-                    if (item.sellIn < 6) {
-                        item.incrementQuality()
-                    }
-                }
-            } else {
-                if (item.quality > 0) {
-                    if (!item.isSulfuras()) {
-                        item.decrementQuality()
-                    }
-                }
-            }
-
-            if (!item.isSulfuras()) {
-                item.sellIn = item.sellIn - 1
-            }
-
-            if (item.sellIn < 0) {
-                if (item.isBrie()) {
+            if (item.isBackstage()) {
+                if (item.sellIn < 11) {
                     item.incrementQuality()
+                }
+
+                if (item.sellIn < 6) {
+                    item.incrementQuality()
+                }
+            }
+        } else {
+            if (item.quality > 0) {
+                if (!item.isSulfuras()) {
+                    item.decrementQuality()
+                }
+            }
+        }
+
+        if (!item.isSulfuras()) {
+            item.sellIn = item.sellIn - 1
+        }
+
+        if (item.sellIn < 0) {
+            if (item.isBrie()) {
+                item.incrementQuality()
+            } else {
+                if (item.isBackstage()) {
+                    item.quality = 0
                 } else {
-                    if (item.isBackstage()) {
-                        item.quality = 0
-                    } else {
-                        if (item.quality > 0) {
-                            if (!item.isSulfuras()) {
-                                item.decrementQuality()
-                            }
+                    if (item.quality > 0) {
+                        if (!item.isSulfuras()) {
+                            item.decrementQuality()
                         }
                     }
                 }
