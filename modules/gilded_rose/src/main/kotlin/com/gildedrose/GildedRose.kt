@@ -5,7 +5,7 @@ class GildedRose(var items: Array<Item>) {
     fun updateQuality() {
          for (item in items) {
              when {
-                 item.isBrie() -> updateItem(item)
+                 item.isBrie() -> updateBrie(item)
                  item.isBackstage() -> updateBackstage(item)
                  item.isSulfuras() -> updateItem(item)
                  else -> updateItem(item)
@@ -14,6 +14,48 @@ class GildedRose(var items: Array<Item>) {
     }
 
     private fun updateItem(item: Item) {
+        if (item.isBrie() || item.isBackstage()) {
+            item.incrementQuality()
+
+            if (item.isBackstage()) {
+                if (item.sellIn < 11) {
+                    item.incrementQuality()
+                }
+
+                if (item.sellIn < 6) {
+                    item.incrementQuality()
+                }
+            }
+        } else {
+            if (item.quality > 0) {
+                if (!item.isSulfuras()) {
+                    item.decrementQuality()
+                }
+            }
+        }
+
+        if (!item.isSulfuras()) {
+            item.sellIn = item.sellIn - 1
+        }
+
+        if (item.sellIn < 0) {
+            if (item.isBrie()) {
+                item.incrementQuality()
+            } else {
+                if (item.isBackstage()) {
+                    item.quality = 0
+                } else {
+                    if (item.quality > 0) {
+                        if (!item.isSulfuras()) {
+                            item.decrementQuality()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun updateBrie(item: Item) {
         if (item.isBrie() || item.isBackstage()) {
             item.incrementQuality()
 
