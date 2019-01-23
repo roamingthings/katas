@@ -44,19 +44,3 @@ class GildedRose(var items: Array<Item>) {
     }
 
 }
-
-const val SULFURAS = "Sulfuras, Hand of Ragnaros"
-const val AGED_BRIE = "Aged Brie"
-const val BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert"
-
-private fun Item.isBrie() = name == AGED_BRIE
-
-private fun Item.isBackstage() = name == BACKSTAGE_PASSES
-
-private fun Item.isSulfuras() = name == SULFURAS
-
-private fun Item.incrementQuality() = if (quality < 50) ++quality else quality
-
-private fun Item.decrementQuality() = --quality
-
-private fun Item.decrementSellIn() = sellIn--
