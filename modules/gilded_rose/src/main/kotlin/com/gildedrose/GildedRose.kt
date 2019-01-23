@@ -45,14 +45,14 @@ class GildedRose(var items: Array<Item>) {
 
 }
 
-private fun Item.isBrie() = name.equals("Aged Brie")
+private fun Item.isBrie() = name == "Aged Brie"
 
-private fun Item.isBackstage() = name.equals("Backstage passes to a TAFKAL80ETC concert")
+private fun Item.isBackstage() = name == "Backstage passes to a TAFKAL80ETC concert"
 
-private fun Item.isSulfuras() = name.equals("Sulfuras, Hand of Ragnaros")
+private fun Item.isSulfuras() = name == "Sulfuras, Hand of Ragnaros"
 
-private fun Item.incrementQuality() = if (quality < 50) quality++ else quality
+private fun Item.incrementQuality() = if (quality < 50) ++quality else quality
 
-private fun Item.decrementQuality() = quality--
+private fun Item.decrementQuality() = --quality
 
 private fun Item.decrementSellIn() = sellIn--
