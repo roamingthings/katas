@@ -3,13 +3,11 @@ package com.gildedrose
 class GildedRose(var items: Array<Item>) {
 
     fun updateQuality() {
-         for (item in items) {
-             when {
-                 item.isBrie() -> updateBrie(item)
-                 item.isBackstage() -> updateBackstage(item)
-                 item.isSulfuras() -> updateSulfuras(item)
-                 else -> updateItem(item)
-             }
+         for (item in items) when {
+             item.isBrie() -> updateBrie(item)
+             item.isBackstage() -> updateBackstage(item)
+             item.isSulfuras() -> {}    // Sulfuras does not age
+             else -> updateItem(item)
          }
     }
 
@@ -55,47 +53,6 @@ class GildedRose(var items: Array<Item>) {
         }
     }
 
-    private fun updateSulfuras(item: Item) {
-        if (item.isBrie() || item.isBackstage()) {
-            item.incrementQuality()
-
-            if (item.isBackstage()) {
-                if (item.sellIn < 11) {
-                    item.incrementQuality()
-                }
-
-                if (item.sellIn < 6) {
-                    item.incrementQuality()
-                }
-            }
-        } else {
-            if (item.quality > 0) {
-                if (!item.isSulfuras()) {
-                    item.decrementQuality()
-                }
-            }
-        }
-
-        if (!item.isSulfuras()) {
-            item.decrementSellIn()
-        }
-
-        if (item.sellIn < 0) {
-            if (item.isBrie()) {
-                item.incrementQuality()
-            } else {
-                if (item.isBackstage()) {
-                    item.quality = 0
-                } else {
-                    if (item.quality > 0) {
-                        if (!item.isSulfuras()) {
-                            item.decrementQuality()
-                        }
-                    }
-                }
-            }
-        }
-    }
 
     private fun updateBrie(item: Item) {
 
