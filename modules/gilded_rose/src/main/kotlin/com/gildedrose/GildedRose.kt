@@ -41,7 +41,7 @@ class GildedRose(var items: Array<Item>) {
                     }
                 } else {
                     if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        item.quality = item.quality - item.quality
+                        item.quality = 0
                     } else {
                         if (item.quality > 0) {
                             if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
