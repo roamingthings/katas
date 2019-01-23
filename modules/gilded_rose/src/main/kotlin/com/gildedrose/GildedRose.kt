@@ -7,49 +7,19 @@ class GildedRose(var items: Array<Item>) {
              item.isBrie() -> updateBrie(item)
              item.isBackstage() -> updateBackstage(item)
              item.isSulfuras() -> {}    // Sulfuras does not age
-             else -> updateItem(item)
+             else -> updateOrdinary(item)
          }
     }
 
-    private fun updateItem(item: Item) {
-        if (item.isBrie() || item.isBackstage()) {
-            item.incrementQuality()
-
-            if (item.isBackstage()) {
-                if (item.sellIn < 11) {
-                    item.incrementQuality()
-                }
-
-                if (item.sellIn < 6) {
-                    item.incrementQuality()
-                }
-            }
-        } else {
-            if (item.quality > 0) {
-                if (!item.isSulfuras()) {
-                    item.decrementQuality()
-                }
-            }
+    private fun updateOrdinary(item: Item) {
+        if (item.quality > 0) {
+            item.decrementQuality()
         }
 
-        if (!item.isSulfuras()) {
-            item.decrementSellIn()
-        }
+        item.decrementSellIn()
 
-        if (item.sellIn < 0) {
-            if (item.isBrie()) {
-                item.incrementQuality()
-            } else {
-                if (item.isBackstage()) {
-                    item.quality = 0
-                } else {
-                    if (item.quality > 0) {
-                        if (!item.isSulfuras()) {
-                            item.decrementQuality()
-                        }
-                    }
-                }
-            }
+        if (item.sellIn < 0 && item.quality > 0) {
+            item.decrementQuality()
         }
     }
 
