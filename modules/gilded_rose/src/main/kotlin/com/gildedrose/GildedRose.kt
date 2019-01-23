@@ -35,7 +35,7 @@ class GildedRose(var items: Array<Item>) {
         }
 
         if (!item.isSulfuras()) {
-            item.sellIn = item.sellIn - 1
+            item.decrementSellIn()
         }
 
         if (item.sellIn < 0) {
@@ -56,44 +56,13 @@ class GildedRose(var items: Array<Item>) {
     }
 
     private fun updateBrie(item: Item) {
-        if (item.isBrie() || item.isBackstage()) {
-            item.incrementQuality()
 
-            if (item.isBackstage()) {
-                if (item.sellIn < 11) {
-                    item.incrementQuality()
-                }
+        item.incrementQuality()
 
-                if (item.sellIn < 6) {
-                    item.incrementQuality()
-                }
-            }
-        } else {
-            if (item.quality > 0) {
-                if (!item.isSulfuras()) {
-                    item.decrementQuality()
-                }
-            }
-        }
-
-        if (!item.isSulfuras()) {
-            item.sellIn = item.sellIn - 1
-        }
+        item.decrementSellIn()
 
         if (item.sellIn < 0) {
-            if (item.isBrie()) {
-                item.incrementQuality()
-            } else {
-                if (item.isBackstage()) {
-                    item.quality = 0
-                } else {
-                    if (item.quality > 0) {
-                        if (!item.isSulfuras()) {
-                            item.decrementQuality()
-                        }
-                    }
-                }
-            }
+            item.incrementQuality()
         }
     }
 
@@ -108,7 +77,7 @@ class GildedRose(var items: Array<Item>) {
             item.incrementQuality()
         }
 
-        item.sellIn = item.sellIn - 1
+        item.decrementSellIn()
 
         if (item.sellIn < 0) {
             item.quality = 0
@@ -126,4 +95,6 @@ private fun Item.isSulfuras() = name.equals("Sulfuras, Hand of Ragnaros")
 private fun Item.incrementQuality() = if (quality < 50) quality++ else quality
 
 private fun Item.decrementQuality() = quality--
+
+private fun Item.decrementSellIn() = sellIn--
 
