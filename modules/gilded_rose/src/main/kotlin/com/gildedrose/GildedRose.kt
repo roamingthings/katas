@@ -4,7 +4,12 @@ class GildedRose(var items: Array<Item>) {
 
     fun updateQuality() {
          for (item in items) {
-             updateItem(item)
+             when {
+                 item.isBrie() -> updateItem(item)
+                 item.isBackstage() -> updateItem(item)
+                 item.isSulfuras() -> updateItem(item)
+                 else -> updateItem(item)
+             }
          }
     }
 
